@@ -1,0 +1,18 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install Apache webserver
+      yum:
+        name: httpd
+        state: present
+    - name: Start Apache webserver
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+    - name: transfer html files
+      copy:
+        src: index.html
+        dest: /var/www/html    
+        mode: '0777'
+  
